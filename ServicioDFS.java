@@ -4,6 +4,7 @@ import java.util.Iterator;
 import java.util.List;
 
 //RECORRIDO DE PROFUNDIDAD
+//Es un planteo recursivo
 
 public class ServicioDFS {
     private Grafo<?> grafo;
@@ -15,7 +16,10 @@ public class ServicioDFS {
 	}
 	
 	public List<Integer> dfsForest() {
+        
 		// Resolver DFS
+        List<Integer> visitados = new ArrayList<>();
+
         Iterator<Integer> iterator = this.grafo.obtenerVertices(); 
 
         while (iterator.hasNext()) {
@@ -23,8 +27,6 @@ public class ServicioDFS {
             colores.put(vertice, "Blanco");
         }
 
-        System.out.println("====SE SETTEAN TODOS LOS GRAFOS SIN VISITAR====");
-        System.out.println(colores);
 
         int tiempo = 0;
 
@@ -34,18 +36,18 @@ public class ServicioDFS {
             Integer clave = iteratorColores.next();
             String color = colores.get(clave);
             if (color.equals("Blanco")) {
-                dfsVisit(clave, tiempo);
+                dfsVisit(clave, tiempo, visitados);
             }    
         }
-
-		return new ArrayList<>();
+        System.out.println(visitados);
+		return visitados;
 	}
 
-    private void dfsVisit(int idVertice, int tiempo) {
-        System.out.println("== SE VISITA EL VERTICE " + idVertice + " Y SE LE ASIGNA EL COLOR AMARILLO ==");
+    private void dfsVisit(int idVertice, int tiempo, List<Integer> visitados) {
 
         colores.put(idVertice, "Amarillo");
-        //System.out.println(colores);
+        visitados.add(idVertice);
+        
 
         tiempo = tiempo + 1;
         
@@ -55,13 +57,11 @@ public class ServicioDFS {
         while (iteratorAdyacentes.hasNext()){
             Integer clave = iteratorAdyacentes.next();
             
-            System.out.println("== ADYACENTES DE " + idVertice + ": " + clave + " CON COLOR " + colores.get(clave) + " ==");
              if(colores.get(clave) == "Blanco"){
-                dfsVisit(clave, tiempo);
+                dfsVisit(clave, tiempo, visitados);
              }
         }
         
-        System.out.println(idVertice + " YA NO TIENE ADYACENTES. SE MARCA DE NEGRO.");
         colores.put(idVertice, "Negro");
         tiempo = tiempo + 1;
     
