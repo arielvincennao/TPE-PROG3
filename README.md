@@ -6,7 +6,7 @@ First part:
 
 Graph structure (DONE)
 DFS method (DONE)
-BFS method (WIP)
+BFS method (DONE)
 "Caminos" method (WIP)
 
 ////////////////////////////////////////////////////////////////////////////
