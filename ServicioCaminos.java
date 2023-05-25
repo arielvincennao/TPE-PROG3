@@ -45,7 +45,9 @@ public class ServicioCaminos {
 
 		if (vertice == destino && caminoActual.size() <= this.lim) {
 			System.out.println("Posible camino encontrado");
+			caminoActual.add(vertice); // Agregar el vértice de destino al camino actual
 			caminosPosibles.add(new ArrayList<>(caminoActual));
+			caminoActual.remove(caminoActual.size() - 1); // Retirar el vértice de destino del camino actual
 		} else {
 			System.out.println("Visito " + vertice);
 			colores.put(vertice, "Amarillo");
